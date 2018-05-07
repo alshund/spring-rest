@@ -29,7 +29,7 @@ public class Article {
     @Column(name = "content")
     private String content;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
     protected Author author;

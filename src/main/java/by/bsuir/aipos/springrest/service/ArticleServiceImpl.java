@@ -53,15 +53,24 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public void removeArticle(String email, String title) {
 
-        articleRepository.deleteByTitleAndAuthor_Email(title, email);
-//        Optional<List<Article>> articleList = articleRepository.findArticlesByAuthor_Email(email);
-//        if (!articleList.isPresent()) {
-//            authorRepository.deleteByEmail(email);
-//        }
+        Optional<Article> article = articleRepository.findByTitleAndAuthor_Email(title, email);
+        article.ifPresent(value -> articleRepository.delete(value));
     }
 
     @Override
     public void updateArticle(String email, String title, Article article) {
 
+        Optional<Author> author = authorRepository.findByEmail(email);
+        if (author.isPresent()) {
+            author.get().setEmail(article.getAuthor().getEmail());
+            Optional<Article> updatedArticle = articleRepository.findByTitleAndAuthor_Email(title, email);
+            if (updatedArticle.isPresent()) {
+                updatedArticle.get().setDescription(article.getDescription());
+                updatedArticle.get().setContent(article.getContent());
+                updatedArticle.get().setTitle(article.getTitle());
+                updatedArticle.get().setAuthor(author.get());
+                articleRepository.save(updatedArticle.get());
+            }
+        }
     }
 }

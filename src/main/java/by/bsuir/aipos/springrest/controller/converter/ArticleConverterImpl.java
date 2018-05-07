@@ -6,9 +6,6 @@ import by.bsuir.aipos.springrest.repository.model.Article;
 import by.bsuir.aipos.springrest.repository.model.Author;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 @Component
 public class ArticleConverterImpl implements ArticleConverter {
     @Override
@@ -27,7 +24,6 @@ public class ArticleConverterImpl implements ArticleConverter {
 
         return Author.builder()
                 .email(headerDto.getAuthorEmail())
-                .articleList(new HashSet<>())
                 .build();
     }
 

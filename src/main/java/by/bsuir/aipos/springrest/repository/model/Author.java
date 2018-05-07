@@ -27,8 +27,8 @@ public class Author {
 
     @Column(name = "username")
     private String username;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    protected Set<Article> articleList;
+//
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+//    protected Set<Article> articleList;
 }

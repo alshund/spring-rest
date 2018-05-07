@@ -59,7 +59,7 @@ public class PatternController {
     public ResponseEntity<?> updateArticle(@PathVariable("email") String email, @PathVariable("title") String title,
                                            @RequestBody ArticleDto articleDto) {
 
-
+        articleService.updateArticle(email, title, articleConverter.dtoToModel(articleDto));
         return ResponseEntity.ok(new ApiResponseBo("Article updated"));
     }
 }
